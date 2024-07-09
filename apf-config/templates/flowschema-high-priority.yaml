@@ -1,0 +1,24 @@
+apiVersion: flowcontrol.apiserver.k8s.io/v1beta3
+kind: FlowSchema
+metadata:
+  name: high-priority-users
+spec:
+  priorityLevelConfiguration:
+    name: high-priority
+  matchingPrecedence: 1000
+  distinguisherMethod:
+    type: ByUser
+  rules:
+    - subjects:
+        - kind: Group
+          group:
+            name: system:masters
+      resourceRules:
+        - verbs: ["*"]
+          apiGroups: ["*"]
+          resources: ["*"]
+          namespaces: ["*"]  # Specify at least one namespace or "*" for all namespaces
+      nonResourceRules:
+        - verbs: ["*"]
+          nonResourceURLs: ["*"]
+

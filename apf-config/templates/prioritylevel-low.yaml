@@ -1,0 +1,15 @@
+apiVersion: flowcontrol.apiserver.k8s.io/v1beta3
+kind: PriorityLevelConfiguration
+metadata:
+  name: low-priority
+spec:
+  type: Limited
+  limited:
+    assuredConcurrencyShares: 10
+    limitResponse:
+      type: Queue
+      queuing:
+        queues: 5
+        handSize: 1
+        queueLengthLimit: 20
+

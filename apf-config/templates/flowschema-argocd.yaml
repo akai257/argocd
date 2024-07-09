@@ -1,0 +1,24 @@
+apiVersion: flowcontrol.apiserver.k8s.io/v1beta3
+kind: FlowSchema
+metadata:
+  name: argocd-users
+spec:
+  priorityLevelConfiguration:
+    name: argocd-priority
+  matchingPrecedence: 1500
+  distinguisherMethod:
+    type: ByUser
+  rules:
+    - subjects:
+        - kind: User
+          user:
+            name: "system:serviceaccount:argocd:argocd-application-controller"
+      resourceRules:
+        - verbs: ["*"]
+          apiGroups: ["*"]
+          resources: ["*"]
+          namespaces: ["*"]
+      nonResourceRules:
+        - verbs: ["*"]
+          nonResourceURLs: ["*"]
+

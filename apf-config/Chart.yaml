@@ -1,0 +1,6 @@
+apiVersion: v2
+name: apf-config
+description: A Helm chart for Kubernetes API Priority and Fairness configuration
+version: 0.1.0
+appVersion: "1.0"
+
